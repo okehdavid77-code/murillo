@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Plan a memorable trip to Tokyo with Kaito Travel.">
+  <link rel="stylesheet" href="style.css">
+  <title>Kaito Travel — Find your Tokyo</title>
+
+    
+  
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#home" aria-label="Kaito Travel home">KAITO TRAVEL</a>
+    <nav aria-label="Main navigation"><a href="#destinations">Destinations</a><a href="#about">About</a><a href="#newsletter">Updates</a></nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home" aria-labelledby="hero-title">
+      <div class="hero-inner">
+        <div class="eyebrow">Find your next story</div>
+        <h1 id="hero-title">Tokyo</h1>
+        <p class="hero-copy">From quiet mountain mornings to neon-lit city nights, plan a trip that stays with you.</p>
+      </div>
+    </section>
+
+    <section class="search-card" aria-label="Trip search">
+      <form id="trip-form">
+        <div class="form-grid">
+          <div><label for="destination">Where to?</label><select id="destination" name="destination" required><option value="">Choose a destination</option><option>Tokyo</option><option>Kyoto</option><option>Hokkaido</option><option>Mount Fuji</option></select></div>
+          <div><label for="depart">Departure</label><input id="depart" name="depart" type="date" required></div>
+          <div><label for="return">Return</label><input id="return" name="return" type="date" required></div>
+          <div><label for="travelers">Travelers</label><select id="travelers" name="travelers"><option>1 traveler</option><option>2 travelers</option><option>3 travelers</option><option>4+ travelers</option></select></div>
+          <button type="submit">Find a trip</button>
+        </div>
+        <p class="notice" id="trip-message" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <section class="section" id="destinations">
+      <div class="section-heading"><div><h2>Choose your destination</h2><p>A few places to start planning.</p></div></div>
+      <div class="cards">
+        <article class="card"><h3>Shibuya</h3><p>Big city energy, hidden lanes</p></article>
+        <article class="card"><h3>Kyoto</h3><p>Temple paths and quiet gardens</p></article>
+        <article class="card"><h3>Mount Fuji</h3><p>Fresh air and wide-open views</p></article>
+      </div>
+    </section>
+
+    <section class="section newsletter" id="newsletter">
+      <div><h2>Travel notes, occasionally</h2><p>Get seasonal ideas and thoughtful Shibuya guides in your inbox.</p></div>
+      <form id="newsletter-form"><label class="sr-only" for="email">Email address</label><input id="email" name="email" type="email" placeholder="Your email address" required><button type="submit">Sign me up</button></form>
+    </section>
+  </main>
+  <footer id="about">Kaito Travel · Made for curious travelers</footer>
+  <script>
+    const tripForm = document.querySelector('#trip-form');
+    const tripMessage = document.querySelector('#trip-message');
+    tripForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const data = new FormData(tripForm);
+      const place = data.get('destination');
+      tripMessage.textContent = `Your ${place} trip search is ready. Adjust the dates or destination to explore more.`;
+    });
+    document.querySelector('#newsletter-form').addEventListener('submit', (event) => {
+      event.preventDefault();
+      const email = document.querySelector('#email');
+      email.value = '';
+      email.placeholder = 'You’re on the list — thank you!';
+    });
+    const depart = document.querySelector('#depart');
+    const returning = document.querySelector('#return');
+    depart.addEventListener('change', () => { returning.min = depart.value; });
+  </script>
+</body>
+</html>
+
+
+
+
